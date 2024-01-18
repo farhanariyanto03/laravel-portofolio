@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\halaman;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class halamanController extends Controller
 {
@@ -11,7 +13,8 @@ class halamanController extends Controller
      */
     public function index()
     {
-        return view('dashboard.halaman.index');
+        $data = halaman::orderBy('judul', 'asc')->get();
+        return view('dashboard.halaman.index')->with('data', $data);
     }
 
     /**
@@ -27,7 +30,27 @@ class halamanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Session::flash('judul', $request->judul);
+        Session::flash('isi', $request->isi);
+        $request->validate(
+            [
+                'judul' => 'required',
+                'isi' => 'required',
+            ],
+            [
+                'judul.required' => 'judul wajib diisi',
+                'isi.required' => 'isian wajib diisi',
+            ]
+        );
+
+        $data = [
+            'judul' =>$request->judul,
+            'isi' =>$request->isi,
+        ];
+        halaman::create($data);
+        
+        return redirect()->route('halaman.index')->with('success', 'Berhasil menambahkan data');
+
     }
 
     /**
@@ -43,7 +66,8 @@ class halamanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = halaman::where('id', $id)->first();
+        return view('dashboard.halaman.update')->with('data', $data);
     }
 
     /**
@@ -51,7 +75,24 @@ class halamanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate(
+            [
+                'judul' => 'required',
+                'isi' => 'required',
+            ],
+            [
+                'judul.required' => 'judul wajib diisi',
+                'isi.required' => 'isian wajib diisi',
+            ]
+        );
+
+        $data = [
+            'judul' =>$request->judul,
+            'isi' =>$request->isi,
+        ];
+        halaman::where('id', $id)->update($data);
+        
+        return redirect()->route('halaman.index')->with('success', 'Berhasil edit data');
     }
 
     /**
@@ -59,6 +100,7 @@ class halamanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        halaman::where('id', $id)->delete();
+        return redirect()->route('halaman.index')->with('success', 'Berhasil delete data');
     }
 }

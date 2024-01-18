@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\authController;
 use App\Http\Controllers\halamanController;
+use App\Models\halaman;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -34,6 +35,7 @@ Route::prefix('dashboard')->middleware('auth')->group(
         Route::get('/', function() {
             return view('dashboard.layout');
         });
+        Route::get('/', [halamanController::class, 'index']);
         Route::resource('halaman', halamanController::class);
     }
 );

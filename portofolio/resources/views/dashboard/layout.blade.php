@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="{{ asset('admin') }}/css/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset('admin') }}/images/favicon.png" />
+    {{-- SUMMERNOTE --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.css" />
 </head>
 
 <body>
@@ -27,8 +30,8 @@
                 <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
                     <a class="navbar-brand brand-logo" href="index.html"><img src="{{ asset('admin') }}/images/logo.svg"
                             alt="logo" /></a>
-                    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{ asset('admin') }}/images/logo-mini.svg"
-                            alt="logo" /></a>
+                    <a class="navbar-brand brand-logo-mini" href="index.html"><img
+                            src="{{ asset('admin') }}/images/logo-mini.svg" alt="logo" /></a>
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button"
                         data-toggle="minimize">
                         <span class="mdi mdi-sort-variant"></span>
@@ -64,9 +67,9 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="documentation/documentation.html">
+                        <a class="nav-link" href="{{ route('halaman.index') }}">
                             <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                            <span class="menu-title">Documentation</span>
+                            <span class="menu-title">Halaman</span>
                         </a>
                     </li>
                 </ul>
@@ -74,6 +77,7 @@
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
+                    @include('dashboard.pesan')
                     <div class="row">
                         <div class="col-md-12 stretch-card">
                             <div class="card">
@@ -122,8 +126,17 @@
     <script src="{{ asset('admin') }}/js/jquery.dataTables.js"></script>
     <script src="{{ asset('admin') }}/js/dataTables.bootstrap4.js"></script>
     <!-- End custom js for this page-->
-
     <script src="{{ asset('admin') }}/js/jquery.cookie.js" type="text/javascript"></script>
+    {{-- SUMMERNOTE --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.summernote').summernote({
+                height: 200
+            });
+        });
+    </script>
 </body>
 
 </html>
