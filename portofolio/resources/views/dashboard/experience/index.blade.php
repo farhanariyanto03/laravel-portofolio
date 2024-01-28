@@ -8,8 +8,10 @@
             <thead>
                 <tr>
                     <th class="col-1">No</th>
-                    <th>Judul</th>
-                    <th>Isi</th>
+                    <th>Posisi</th>
+                    <th>Nama Perusahaan</th>
+                    <th>Tggl Mulai</th>
+                    <th>Tggl Akhir</th>
                     <th class="col-2">Aksi</th>
                 </tr>
             </thead>
@@ -19,10 +21,12 @@
                     <tr>
                         <td>{{ $i }}</td>
                         <td>{{ $item->judul }}</td>
-                        <td>{{ $item->isi }}</td>
+                        <td>{{ $item->info1 }}</td>
+                        <td>{{ $item->tgl_mulai_indo }}</td>
+                        <td>{{ $item->tgl_akhir_indo }}</td>
                         <td>
-                            <a href="{{ route('halaman.edit', $item->id) }}" class="btn btn-sm btn-warning">Update</a>
-                            <form onsubmit="return confirm('Yakin ingin menghapus data ini?')" action="{{ route('halaman.destroy', $item->id) }}" 
+                            <a href="{{ route('experience.edit', $item->id) }}" class="btn btn-sm btn-warning">Update</a>
+                            <form onsubmit="return confirm('Yakin ingin menghapus data ini?')" action="{{ route('experience.destroy', $item->id) }}" 
                                 class="d-inline" method="POST">
                                 @csrf
                                 @method('DELETE')

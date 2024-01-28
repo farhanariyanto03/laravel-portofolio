@@ -14,7 +14,7 @@ class experienceController extends Controller
     public function index()
     {
         $data = riwayat::where('tipe', 'experience')->orderBy('tgl_akhir', 'DESC')->get();
-        return view('dashboard.experince.index')->with('data', $data);
+        return view('dashboard.experience.index')->with('data', $data);
 
     }
 
@@ -23,7 +23,7 @@ class experienceController extends Controller
      */
     public function create()
     {
-        return view('dashboard.experince.create');
+        return view('dashboard.experience.create');
     }
 
     /**
@@ -77,7 +77,8 @@ class experienceController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = riwayat::where('id', $id)->where('tipe', 'experience')->first();
+        return view('dashboard.experience.edit')->with('data', $data);
     }
 
     /**
@@ -85,7 +86,30 @@ class experienceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate(
+            [
+                'judul' => 'required',
+                'info1' => 'required',
+                'tgl_mulai' => 'required',
+                'tgl_akhir' => 'required',
+            ],
+            [
+                'judul.required' => 'Judul wajib diisi',
+                'info1.required' => 'info1 wajib diisi',
+                'tgl_mulai.required' => 'tgl_mulai wajib diisi',
+                'tgl_akhir.required' => 'tgl_akhir wajib diisi',
+            ]
+            );
+
+            $data = [
+                'judul' =>$request->judul,
+                'info1' =>$request->info1,
+                'tgl_mulai' =>$request->tgl_mulai,
+                'tgl_akhir' =>$request->tgl_akhir,
+            ];
+            riwayat::where('id', $id)->update($data);
+
+            return redirect()->route('experience.index')->with('success', 'Berhasil edit data');
     }
 
     /**
@@ -93,6 +117,7 @@ class experienceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        riwayat::where('id', $id)->delete();
+        return redirect()->route('experience.index')->with('success', 'Berhasil delete data');
     }
 }
