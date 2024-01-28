@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\authController;
+use App\Http\Controllers\experienceController;
 use App\Http\Controllers\halamanController;
 use App\Models\halaman;
 use Illuminate\Support\Facades\Auth;
@@ -37,5 +38,6 @@ Route::prefix('dashboard')->middleware('auth')->group(
         });
         Route::get('/', [halamanController::class, 'index']);
         Route::resource('halaman', halamanController::class);
+        Route::resource('experience', experienceController::class);
     }
 );
