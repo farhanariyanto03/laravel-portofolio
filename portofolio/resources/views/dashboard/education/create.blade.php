@@ -2,19 +2,29 @@
 
 @section('konten')
     <div class="pb-3">
-        <a href="{{ route('experience.index') }}" class="btn btn-danger"><< Kembali</a>
+        <a href="{{ route('education.index') }}" class="btn btn-danger"><< Kembali</a>
     </div>
-    <form action="{{ route('experience.store') }}" method="POST">
+    <form action="{{ route('education.store') }}" method="POST">
         @csrf
         <div class="mb-3">
-            <label for="judul" class="form-label">Posisi</label>
+            <label for="judul" class="form-label">Universitas</label>
             <input type="text" class="form-control" name="judul" id="" aria-describedby="helpId"
-                placeholder="Posisi" value="{{ Session::get('judul') }}" />
+                placeholder="Universitas" value="{{ Session::get('judul') }}" />
         </div>
         <div class="mb-3">
-            <label for="info1" class="form-label">Nama Perusahaan</label>
+            <label for="info1" class="form-label">Nama Fakultas</label>
             <input type="text" class="form-control" name="info1" id="info1" aria-describedby="helpId"
                 placeholder="Nama Perusahaan" value="{{ Session::get('info1') }}" />
+        </div>
+        <div class="mb-3">
+            <label for="info1" class="form-label">Nama Prodi</label>
+            <input type="text" class="form-control" name="info2" id="info1" aria-describedby="helpId"
+                placeholder="Nama Prodi" value="{{ Session::get('info2') }}" />
+        </div>
+        <div class="mb-3">
+            <label for="info1" class="form-label">IPK</label>
+            <input type="text" class="form-control" name="info3" id="info1" aria-describedby="helpId"
+                placeholder="IPK" value="{{ Session::get('info3') }}" />
         </div>
         <div class="mb-3">
             <div class="row">
@@ -26,10 +36,10 @@
                     name="tgl_akhir" placeholder="dd/mm/yyyy" value="{{ Session::get('tgl_akhir') }}"></div>
             </div>
         </div>
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="judul" class="form-label">Isi</label>
             <textarea class="form-control summernote" rows="5" name="isi">{{ Session::get('isi') }}</textarea>
-        </div>
+        </div> --}}
         <button type="submit" name="simpan" class="btn btn-primary">Simpan</button>
     </form>
 @endsection
