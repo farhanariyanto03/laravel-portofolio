@@ -4,6 +4,7 @@ use App\Http\Controllers\authController;
 use App\Http\Controllers\educationController;
 use App\Http\Controllers\experienceController;
 use App\Http\Controllers\halamanController;
+use App\Http\Controllers\profileController;
 use App\Http\Controllers\skillController;
 use App\Models\halaman;
 use Illuminate\Support\Facades\Auth;
@@ -44,5 +45,8 @@ Route::prefix('dashboard')->middleware('auth')->group(
         Route::resource('education', educationController::class);
         Route::get('skill', [skillController::class, 'index'])->name('skill.index');
         Route::post('skill', [skillController::class, 'update'])->name('skill.update');
+        Route::resource('profile', profileController::class);
+        // Route::get('profile', [profileController::class, 'index'])->name('profile.index');
+        // Route::post('profile', [profileController::class, 'update'])->name('profile.update');
     }
 );
